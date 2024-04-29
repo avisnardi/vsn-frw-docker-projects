@@ -1,0 +1,28 @@
+networks:
+    vsn_net:
+        driver: bridge
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: VsnSecurity
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: aledmin
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    volumes:
+      - /home/avisnardi/docker.volumes/postgres:/var/lib/postgresql/data
+    networks:
+      vsn_net:
+                
+  vsn-app:
+    image: vsn-img-app
+    environment:
+      VSN_DATASOURCE_URL: jdbc:postgresql://postgres:5432/VsnSecurity
+    depends_on:
+      - postgres
+    ports:
+      - 3001:3001
+    networks:
+      vsn_net:        

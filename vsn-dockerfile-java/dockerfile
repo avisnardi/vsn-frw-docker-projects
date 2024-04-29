@@ -1,0 +1,4 @@
+from ubuntu
+WORKDIR /app
+RUN apt-get update 
+RUN apt-get install -y openjdk-17-jre-headless
