@@ -26,3 +26,14 @@ services:
       - 3001:3001
     networks:
       vsn_net:        
+
+  nginx:
+    image: vsn-img-nginx
+    depends_on:
+      - postgres
+    ports:
+      - 8080:80
+    volumes:
+      - /home/avisnardi/docker.volumes/nginx/site:/usr/share/nginx/html:ro
+    networks:
+      vsn_net:        
